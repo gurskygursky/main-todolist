@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import {Todolist} from './Todolist';
+import {TasksType, Todolist} from './Todolist';
 
-const ArrayTasks1 = [
+const ArrayTasks1: Array<TasksType> = [
     {id: 1, title: 'HTML&CSS', isDone: true},
     {id: 2, title: 'JS', isDone: true},
     {id: 3, title: 'ReactJS', isDone: false},
@@ -10,7 +10,7 @@ const ArrayTasks1 = [
     {id: 5, title: 'Swift', isDone: false},
 ];
 
-const ArrayTasks2 = [
+const ArrayTasks2: Array<TasksType> = [
     {id: 1, title: 'The Madness Of Crowds', isDone: true},
     {id: 2, title: 'Atomic Habits:', isDone: true},
     {id: 3, title: 'The Rise and Fall of the Third Reich', isDone: true},
