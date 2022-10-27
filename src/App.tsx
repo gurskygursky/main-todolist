@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TasksType, Todolist} from './Todolist';
+import {TaskStatusesType, TasksType, Todolist} from './Todolist';
 
 // const ArrayTasks1: Array<TasksType> = [
 //     {id: 1, title: 'HTML&CSS', isDone: true},
@@ -28,16 +28,32 @@ export const App = () => {
         {id: 5, title: 'Swift', isDone: false},
     ]);
 
+    const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
+
     const removeTask = (taskID: number) => {
         setTasks(tasks.filter((task: TasksType) => task.id !== taskID));
+    }
+    const taskStatusesHandler = (status: TaskStatusesType) => {
+        setTasksStatus(status);
+    }
+
+    let filteredTasks = tasks;
+
+    if (taskStatus === 'Completed') {
+        filteredTasks = tasks.filter((task: TasksType) => task.isDone);
+    }
+    if (taskStatus === 'Active') {
+       filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
     }
 
 
     return (
         <div className="App">
             <Todolist title={'What to learn'}
-                      tasks={tasks}
+                      tasks={filteredTasks}
                       removeTask={removeTask}
+                      taskStatusesHandler={taskStatusesHandler}
+
             />
             {/*<Todolist title={'Books'} tasks={ArrayTasks2}/>*/}
         </div>
