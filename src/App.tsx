@@ -28,9 +28,17 @@ export const App = () => {
         {id: 5, title: 'Swift', isDone: false},
     ]);
 
+    const removeTask = (taskID: number) => {
+        setTasks(tasks.filter((task: TasksType) => task.id !== taskID));
+    }
+
+
     return (
         <div className="App">
-            <Todolist title={'What to learn'} tasks={tasks}/>
+            <Todolist title={'What to learn'}
+                      tasks={tasks}
+                      removeTask={removeTask}
+            />
             {/*<Todolist title={'Books'} tasks={ArrayTasks2}/>*/}
         </div>
     );
