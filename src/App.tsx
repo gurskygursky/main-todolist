@@ -47,6 +47,10 @@ export const App = () => {
        filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
     }
 
+    const addTask = (title: string) => {
+        setTasks([{id: v1(), title, isDone: false}, ...tasks]);
+    }
+
 
     return (
         <div className="App">
@@ -54,6 +58,7 @@ export const App = () => {
                       tasks={filteredTasks}
                       removeTask={removeTask}
                       taskStatusesHandler={taskStatusesHandler}
+                      addTask={addTask}
 
             />
             {/*<Todolist title={'Books'} tasks={ArrayTasks2}/>*/}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 export type TasksType = {
     id: string;
@@ -12,9 +12,12 @@ type TodolistPropsType = {
     tasks: Array<TasksType>;
     removeTask: (taskID: string) => void;
     taskStatusesHandler: (status: TaskStatusesType) => void;
+    addTask: (title: string) => void;
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+
+    const [inputValue, setInputValue] = useState<string>('');
 
     const removeTask = (taskID: string) => {
         props.removeTask(taskID);
@@ -24,12 +27,23 @@ export const Todolist = (props: TodolistPropsType) => {
         props.taskStatusesHandler(status);
     }
 
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.currentTarget.value);
+    }
+
+    const addTask = () => {
+        if (inputValue.trim() !== null) {
+            props.addTask(inputValue);
+        }
+        setInputValue('');
+    }
+
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <button>+</button>
+                <input type={'text'} value={inputValue} onChange={onChangeHandler}/>
+                <button onClick={addTask}>+</button>
             </div>
             <ul>
                 {props.tasks.map(task => {
