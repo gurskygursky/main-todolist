@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { v1 } from 'uuid';
+import {v1} from 'uuid';
 import './App.css';
 import {TaskStatusesType, TasksType, Todolist} from './Todolist';
 
@@ -44,13 +44,12 @@ export const App = () => {
         filteredTasks = tasks.filter((task: TasksType) => task.isDone);
     }
     if (taskStatus === 'Active') {
-       filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
+        filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
     }
 
     const addTask = (title: string) => {
         setTasks([{id: v1(), title, isDone: false}, ...tasks]);
     }
-
 
     return (
         <div className="App">
@@ -59,7 +58,6 @@ export const App = () => {
                       removeTask={removeTask}
                       taskStatusesHandler={taskStatusesHandler}
                       addTask={addTask}
-
             />
             {/*<Todolist title={'Books'} tasks={ArrayTasks2}/>*/}
         </div>
