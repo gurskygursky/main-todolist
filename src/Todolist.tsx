@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type TasksType = {
-    id: number;
+    id: string;
     title: string;
     isDone: boolean;
 }
@@ -10,13 +10,13 @@ export type TaskStatusesType = 'All' | 'Active' | 'Completed';
 type TodolistPropsType = {
     title: string;
     tasks: Array<TasksType>;
-    removeTask: (taskID: number) => void;
+    removeTask: (taskID: string) => void;
     taskStatusesHandler: (status: TaskStatusesType) => void;
 }
 
 export const Todolist = (props: TodolistPropsType) => {
 
-    const removeTask = (taskID: number) => {
+    const removeTask = (taskID: string) => {
         props.removeTask(taskID);
     }
 

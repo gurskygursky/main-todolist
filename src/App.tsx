@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { v1 } from 'uuid';
 import './App.css';
 import {TaskStatusesType, TasksType, Todolist} from './Todolist';
 
@@ -21,16 +22,16 @@ import {TaskStatusesType, TasksType, Todolist} from './Todolist';
 export const App = () => {
 
     const [tasks, setTasks] = useState<Array<TasksType>>([
-        {id: 1, title: 'HTML&CSS', isDone: true},
-        {id: 2, title: 'JS', isDone: true},
-        {id: 3, title: 'ReactJS', isDone: false},
-        {id: 4, title: 'NodeJS', isDone: false},
-        {id: 5, title: 'Swift', isDone: false},
+        {id: v1(), title: 'HTML&CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'ReactJS', isDone: false},
+        {id: v1(), title: 'NodeJS', isDone: false},
+        {id: v1(), title: 'Swift', isDone: false},
     ]);
 
     const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
 
-    const removeTask = (taskID: number) => {
+    const removeTask = (taskID: string) => {
         setTasks(tasks.filter((task: TasksType) => task.id !== taskID));
     }
     const taskStatusesHandler = (status: TaskStatusesType) => {
