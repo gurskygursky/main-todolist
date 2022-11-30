@@ -11,7 +11,7 @@ type TodolistPropsType = {
     todolistID: string;
     title: string;
     tasks: Array<TaskType>;
-    removeTask: (taskID: string) => void;
+    removeTask: (todolistID: string, taskID: string) => void;
     taskStatusesHandler: (todolistID: string, status: TaskStatusesType) => void;
     addTask: (title: string) => void;
     filter: TaskStatusesType;
@@ -22,8 +22,8 @@ export const Todolist = (props: TodolistPropsType) => {
 
     const [inputValue, setInputValue] = useState<string>('');
 
-    const removeTask = (taskID: string) => {
-        props.removeTask(taskID);
+    const removeTask = (todolistID: string, taskID: string) => {
+        props.removeTask(props.todolistID, taskID);
     }
 
     const onClickTasksStatusesHandler = (todolistID: string, status: TaskStatusesType) => {
@@ -68,7 +68,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 {props.tasks.map(task => {
                     return (
                         <li key={task.id}>
-                            <button onClick={() => removeTask(task.id)}>x</button>
+                            <button onClick={() => removeTask(props.todolistID, task.id)}>x</button>
                             <input type="checkbox" checked={task.isDone}
                                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
                                        onCheckboxHandler(task.id, event.currentTarget.checked)

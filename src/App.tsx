@@ -70,8 +70,9 @@ export const App = () => {
 
     // const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
 
-    const removeTask = (taskID: string) => {
-        setTasks(tasks.filter((task: TaskType) => task.id !== taskID));
+    const removeTask = (todolistID: string, taskID: string) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].filter((task: TaskType) => task.id !== taskID)})
+        // setTasks(tasks.filter((task: TaskType) => task.id !== taskID));
     }
     const taskStatusesHandler = (todolistID: string, status: TaskStatusesType) => {
         setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {
