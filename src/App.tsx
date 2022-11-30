@@ -19,15 +19,54 @@ import {TaskStatusesType, TasksType, Todolist} from './Todolist';
 //     {id: 5, title: `JavaScript Absolute Beginner's Guide`, isDone: false},
 // ];
 
+type TodolistType = {
+    id: string;
+    title: string
+    taskStatus: TaskStatusesType;
+}
+
+// const todolistID1 = v1();
+// const todolistID2 = v1();
+//
+// const [lists, setLists] = useState([
+//
+// ])
+
+
 export const App = () => {
 
-    const [tasks, setTasks] = useState<Array<TasksType>>([
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'ReactJS', isDone: false},
-        {id: v1(), title: 'NodeJS', isDone: false},
-        {id: v1(), title: 'Swift', isDone: false},
-    ]);
+    const todolistID1 = v1();
+    const todolistID2 = v1();
+
+    const [lists, setLists] = useState<Array<TodolistType>>([
+        {id: todolistID1, title: 'What to learn', taskStatus: 'All'},
+        {id: todolistID2, title: 'What to read', taskStatus: 'All'},
+    ])
+
+    const [tasks, setTasks] = useState<any>({
+        [todolistID1]: [
+            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'JS', isDone: true},
+            {id: v1(), title: 'ReactJS', isDone: false},
+            {id: v1(), title: 'NodeJS', isDone: false},
+            {id: v1(), title: 'Swift', isDone: false},
+        ],
+        [todolistID2]: [
+            {id: v1(), title: 'The Madness Of Crowds', isDone: true},
+            {id: v1(), title: 'Atomic Habits:', isDone: true},
+            {id: v1(), title: 'The Rise and Fall of the Third Reich', isDone: true},
+            {id: v1(), title: 'JavaScript for Kids', isDone: true},
+            {id: v1(), title: `JavaScript Absolute Beginner's Guide`, isDone: false},
+        ]
+    })
+
+    // const [tasks, setTasks] = useState<Array<TasksType>>([
+    //     {id: v1(), title: 'HTML&CSS', isDone: true},
+    //     {id: v1(), title: 'JS', isDone: true},
+    //     {id: v1(), title: 'ReactJS', isDone: false},
+    //     {id: v1(), title: 'NodeJS', isDone: false},
+    //     {id: v1(), title: 'Swift', isDone: false},
+    // ]);
 
     const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
 
@@ -38,14 +77,14 @@ export const App = () => {
         setTasksStatus(status);
     }
 
-    let filteredTasks = tasks;
-
-    if (taskStatus === 'Completed') {
-        filteredTasks = tasks.filter((task: TasksType) => task.isDone);
-    }
-    if (taskStatus === 'Active') {
-        filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
-    }
+    // let filteredTasks = tasks;
+    //
+    // if (taskStatus === 'Completed') {
+    //     filteredTasks = tasks.filter((task: TasksType) => task.isDone);
+    // }
+    // if (taskStatus === 'Active') {
+    //     filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
+    // }
 
     const addTask = (title: string) => {
         setTasks([{id: v1(), title, isDone: false}, ...tasks]);
@@ -53,12 +92,32 @@ export const App = () => {
 
     return (
         <div className="App">
-            <Todolist title={'What to learn'}
-                      tasks={filteredTasks}
-                      removeTask={removeTask}
-                      taskStatusesHandler={taskStatusesHandler}
-                      addTask={addTask}
-            />
+            {lists.map((todolist: TodolistType) => {
+
+                    let filteredTasks = tasks[todolist.id];
+
+                    if (taskStatus === 'Completed') {
+                        filteredTasks = tasks[todolist.id].filter((task: TasksType) => task.isDone);
+                    }
+                    if (taskStatus === 'Active') {
+                        filteredTasks = tasks[todolist.id].filter((task: TasksType) => !task.isDone);
+                    }
+
+                    return <Todolist key={todolist.id}
+                                     todolistID={todolist.id}
+                                     title={todolist.title}
+                                     tasks={filteredTasks}
+                                     removeTask={removeTask}
+                                     taskStatusesHandler={taskStatusesHandler}
+                                     addTask={addTask}/>
+                }
+            )}
+            {/*<Todolist title={'What to learn'}*/}
+            {/*          tasks={filteredTasks}*/}
+            {/*          removeTask={removeTask}*/}
+            {/*          taskStatusesHandler={taskStatusesHandler}*/}
+            {/*          addTask={addTask}*/}
+            {/*/>*/}
             {/*<Todolist title={'Books'} tasks={ArrayTasks2}/>*/}
         </div>
     );

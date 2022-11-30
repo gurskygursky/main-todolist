@@ -8,6 +8,7 @@ export type TasksType = {
 export type TaskStatusesType = 'All' | 'Active' | 'Completed';
 
 type TodolistPropsType = {
+    todolistID: string;
     title: string;
     tasks: Array<TasksType>;
     removeTask: (taskID: string) => void;
