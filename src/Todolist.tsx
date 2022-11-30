@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
-export type TasksType = {
+export type TaskType = {
     id: string;
     title: string;
     isDone: boolean;
@@ -10,7 +10,7 @@ export type TaskStatusesType = 'All' | 'Active' | 'Completed';
 type TodolistPropsType = {
     todolistID: string;
     title: string;
-    tasks: Array<TasksType>;
+    tasks: Array<TaskType>;
     removeTask: (taskID: string) => void;
     taskStatusesHandler: (todolistID: string, status: TaskStatusesType) => void;
     addTask: (title: string) => void;

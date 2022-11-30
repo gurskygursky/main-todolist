@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {v1} from 'uuid';
 import './App.css';
-import {TaskStatusesType, TasksType, Todolist} from './Todolist';
+import {TaskStatusesType, TaskType, Todolist} from './Todolist';
 
 // const ArrayTasks1: Array<TasksType> = [
 //     {id: 1, title: 'HTML&CSS', isDone: true},
@@ -71,7 +71,7 @@ export const App = () => {
     // const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
 
     const removeTask = (taskID: string) => {
-        setTasks(tasks.filter((task: TasksType) => task.id !== taskID));
+        setTasks(tasks.filter((task: TaskType) => task.id !== taskID));
     }
     const taskStatusesHandler = (todolistID: string, status: TaskStatusesType) => {
         setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {
@@ -97,7 +97,7 @@ export const App = () => {
     const taskIsChecked = (todolistID: string, taskID: string, isDone: boolean) => {
         setTasks({
             ...tasks, [todolistID]: tasks[todolistID]
-                .map((task: TasksType) => task.id === taskID ? {...task, isDone} : task)
+                .map((task: TaskType) => task.id === taskID ? {...task, isDone} : task)
         });
     }
 
@@ -109,10 +109,10 @@ export const App = () => {
                     let filteredTasks = tasks[todolist.id];
 
                     if (todolist.taskStatus === 'Completed') {
-                        filteredTasks = tasks[todolist.id].filter((task: TasksType) => task.isDone);
+                        filteredTasks = tasks[todolist.id].filter((task: TaskType) => task.isDone);
                     }
                     if (todolist.taskStatus === 'Active') {
-                        filteredTasks = tasks[todolist.id].filter((task: TasksType) => !task.isDone);
+                        filteredTasks = tasks[todolist.id].filter((task: TaskType) => !task.isDone);
                     }
 
                     return <Todolist key={todolist.id}
