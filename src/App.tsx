@@ -35,8 +35,8 @@ type TodolistType = {
 
 export const App = () => {
 
-    const todolistID1 = v1();
-    const todolistID2 = v1();
+    let todolistID1 = v1();
+    let todolistID2 = v1();
 
     const [lists, setLists] = useState<Array<TodolistType>>([
         {id: todolistID1, title: 'What to learn', taskStatus: 'All'},
@@ -68,13 +68,14 @@ export const App = () => {
     //     {id: v1(), title: 'Swift', isDone: false},
     // ]);
 
-    const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
+    // const [taskStatus, setTasksStatus] = useState<TaskStatusesType>('All');
 
     const removeTask = (taskID: string) => {
         setTasks(tasks.filter((task: TasksType) => task.id !== taskID));
     }
-    const taskStatusesHandler = (status: TaskStatusesType) => {
-        setTasksStatus(status);
+    const taskStatusesHandler = (todolistID: string, status: TaskStatusesType) => {
+        setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {...todolist, taskStatus: status} : todolist))
+        // setTasksStatus(todolistID, status);
     }
 
     // let filteredTasks = tasks;
@@ -94,12 +95,13 @@ export const App = () => {
         <div className="App">
             {lists.map((todolist: TodolistType) => {
 
+                    // let allTodolistTasks = tasks[todolist.id];
                     let filteredTasks = tasks[todolist.id];
 
-                    if (taskStatus === 'Completed') {
+                    if (todolist.taskStatus === 'Completed') {
                         filteredTasks = tasks[todolist.id].filter((task: TasksType) => task.isDone);
                     }
-                    if (taskStatus === 'Active') {
+                    if (todolist.taskStatus === 'Active') {
                         filteredTasks = tasks[todolist.id].filter((task: TasksType) => !task.isDone);
                     }
 
@@ -109,7 +111,9 @@ export const App = () => {
                                      tasks={filteredTasks}
                                      removeTask={removeTask}
                                      taskStatusesHandler={taskStatusesHandler}
-                                     addTask={addTask}/>
+                                     addTask={addTask}
+                                     filter={todolist.taskStatus}
+                    />
                 }
             )}
             {/*<Todolist title={'What to learn'}*/}

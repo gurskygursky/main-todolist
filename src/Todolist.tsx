@@ -12,8 +12,9 @@ type TodolistPropsType = {
     title: string;
     tasks: Array<TasksType>;
     removeTask: (taskID: string) => void;
-    taskStatusesHandler: (status: TaskStatusesType) => void;
+    taskStatusesHandler: (todolistID: string, status: TaskStatusesType) => void;
     addTask: (title: string) => void;
+    filter: TaskStatusesType;
 }
 
 export const Todolist = (props: TodolistPropsType) => {
@@ -24,8 +25,8 @@ export const Todolist = (props: TodolistPropsType) => {
         props.removeTask(taskID);
     }
 
-    const onClickTasksStatusesHandler = (status: TaskStatusesType) => {
-        props.taskStatusesHandler(status);
+    const onClickTasksStatusesHandler = (todolistID: string, status: TaskStatusesType) => {
+        props.taskStatusesHandler(props.todolistID, status);
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -70,9 +71,9 @@ export const Todolist = (props: TodolistPropsType) => {
                 })}
             </ul>
             <div>
-                <button onClick={() => onClickTasksStatusesHandler('All')}>All</button>
-                <button onClick={() => onClickTasksStatusesHandler('Active')}>Active</button>
-                <button onClick={() => onClickTasksStatusesHandler('Completed')}>Completed</button>
+                <button onClick={() => onClickTasksStatusesHandler(props.todolistID, 'All')}>All</button>
+                <button onClick={() => onClickTasksStatusesHandler(props.todolistID, 'Active')}>Active</button>
+                <button onClick={() => onClickTasksStatusesHandler(props.todolistID, 'Completed')}>Completed</button>
             </div>
         </div>
     );
