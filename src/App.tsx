@@ -74,7 +74,10 @@ export const App = () => {
         setTasks(tasks.filter((task: TasksType) => task.id !== taskID));
     }
     const taskStatusesHandler = (todolistID: string, status: TaskStatusesType) => {
-        setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {...todolist, taskStatus: status} : todolist))
+        setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {
+            ...todolist,
+            taskStatus: status
+        } : todolist))
         // setTasksStatus(todolistID, status);
     }
 
@@ -89,6 +92,13 @@ export const App = () => {
 
     const addTask = (title: string) => {
         setTasks([{id: v1(), title, isDone: false}, ...tasks]);
+    }
+
+    const taskIsChecked = (todolistID: string, taskID: string, isDone: boolean) => {
+        setTasks({
+            ...tasks, [todolistID]: tasks[todolistID]
+                .map((task: TasksType) => task.id === taskID ? {...task, isDone} : task)
+        });
     }
 
     return (
@@ -113,6 +123,7 @@ export const App = () => {
                                      taskStatusesHandler={taskStatusesHandler}
                                      addTask={addTask}
                                      filter={todolist.taskStatus}
+                                     taskIsChecked={taskIsChecked}
                     />
                 }
             )}
