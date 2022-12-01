@@ -91,8 +91,10 @@ export const App = () => {
     //     filteredTasks = tasks.filter((task: TasksType) => !task.isDone);
     // }
 
-    const addTask = (title: string) => {
-        setTasks([{id: v1(), title, isDone: false}, ...tasks]);
+    const addTask = (todolistID: string, title: string) => {
+        // tasks[todolistID] = [{id: v1(), title, isDone: false}, ...tasks[todolistID]];
+        setTasks({...tasks, [todolistID]: [{id: v1(), title, isDone: false}, ...tasks[todolistID]]});
+        // setTasks([{id: v1(), title, isDone: false}, ...tasks]);
     }
 
     const taskIsChecked = (todolistID: string, taskID: string, isDone: boolean) => {

@@ -13,7 +13,7 @@ type TodolistPropsType = {
     tasks: Array<TaskType>;
     removeTask: (todolistID: string, taskID: string) => void;
     taskStatusesHandler: (todolistID: string, status: TaskStatusesType) => void;
-    addTask: (title: string) => void;
+    addTask: (todolistID: string, title: string) => void;
     filter: TaskStatusesType;
     taskIsChecked: (todolistID: string, taskID: string, isDone: boolean) => void;
 }
@@ -36,7 +36,7 @@ export const Todolist = (props: TodolistPropsType) => {
 
     const addTask = () => {
         if (inputValue.trim() !== null) {
-            props.addTask(inputValue);
+            props.addTask(props.todolistID, inputValue);
         }
         setInputValue('');
     }
