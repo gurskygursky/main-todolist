@@ -51,6 +51,12 @@ export const App = () => {
         });
     }
 
+    const removeTodolist = (todolistID: string) => {
+        setLists(lists.filter((list: TodolistType) => list.id !== todolistID));
+        delete tasks[todolistID];
+        setTasks({...tasks});
+    }
+
     return (
         <div className="App">
             {lists.map((todolist: TodolistType) => {
@@ -73,6 +79,7 @@ export const App = () => {
                                      addTask={addTask}
                                      filter={todolist.taskStatus}
                                      taskIsChecked={taskIsChecked}
+                                     removeTodolist={removeTodolist}
                     />
                 }
             )}

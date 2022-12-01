@@ -25,6 +25,7 @@ type TodolistPropsType = {
     addTask: (todolistID: string, title: string) => void;
     filter: TaskStatusesType;
     taskIsChecked: (todolistID: string, taskID: string, isDone: boolean) => void;
+    removeTodolist: (todolistID: string) => void;
 }
 
 export const Todolist = (props: TodolistPropsType) => {
@@ -62,9 +63,15 @@ export const Todolist = (props: TodolistPropsType) => {
         props.taskIsChecked(props.todolistID, taskID, isDone);
     }
 
+    const removeTodolist = () => {
+        props.removeTodolist(props.todolistID);
+    }
+
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{props.title}
+                <button onClick={removeTodolist}>x</button>
+            </h3>
             <div>
                 <input type={'text'}
                        value={inputValue}
