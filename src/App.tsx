@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {v1} from 'uuid';
 import './App.css';
-import {TaskStatusesType, TaskType, Todolist} from './Todolist';
+import {TaskStatusesType, TasksType, TaskType, Todolist, TodolistType} from './Todolist';
 
 // const ArrayTasks1: Array<TasksType> = [
 //     {id: 1, title: 'HTML&CSS', isDone: true},
@@ -19,11 +19,11 @@ import {TaskStatusesType, TaskType, Todolist} from './Todolist';
 //     {id: 5, title: `JavaScript Absolute Beginner's Guide`, isDone: false},
 // ];
 
-type TodolistType = {
-    id: string;
-    title: string
-    taskStatus: TaskStatusesType;
-}
+// export type TodolistType = {
+//     id: string;
+//     title: string
+//     taskStatus: TaskStatusesType;
+// }
 
 // const todolistID1 = v1();
 // const todolistID2 = v1();
@@ -32,18 +32,17 @@ type TodolistType = {
 //
 // ])
 
-
 export const App = () => {
 
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    const [lists, setLists] = useState<Array<TodolistType>>([
+    const [lists, setLists] = useState<TodolistType[]>([
         {id: todolistID1, title: 'What to learn', taskStatus: 'All'},
         {id: todolistID2, title: 'What to read', taskStatus: 'All'},
     ])
 
-    const [tasks, setTasks] = useState<any>({
+    const [tasks, setTasks] = useState<TasksType>({
         [todolistID1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
@@ -92,7 +91,6 @@ export const App = () => {
     // }
 
     const addTask = (todolistID: string, title: string) => {
-        // tasks[todolistID] = [{id: v1(), title, isDone: false}, ...tasks[todolistID]];
         setTasks({...tasks, [todolistID]: [{id: v1(), title, isDone: false}, ...tasks[todolistID]]});
         // setTasks([{id: v1(), title, isDone: false}, ...tasks]);
     }

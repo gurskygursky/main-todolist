@@ -5,6 +5,15 @@ export type TaskType = {
     title: string;
     isDone: boolean;
 }
+export type TasksType = {
+    [key: string]: TaskType[];
+}
+export type TodolistType = {
+    id: string;
+    title: string
+    taskStatus: TaskStatusesType;
+}
+
 export type TaskStatusesType = 'All' | 'Active' | 'Completed';
 
 type TodolistPropsType = {
