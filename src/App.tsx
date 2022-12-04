@@ -68,6 +68,10 @@ export const App = () => {
         setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {...todolist, title,} : todolist));
     }
 
+    const editTaskTitle = (todolistID: string, taskID: string, title: string) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map((task: TaskType) => task.id === taskID ? {...task, title} : task)});
+    }
+
     return (
         <div className="App">
             <InputForm callback={addTodolist}/>
@@ -93,6 +97,7 @@ export const App = () => {
                                      taskIsChecked={taskIsChecked}
                                      removeTodolist={removeTodolist}
                                      editTodolistTitle={editTodolistTitle}
+                                     editTaskTitle={editTaskTitle}
                     />
                 }
             )}
