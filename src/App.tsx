@@ -64,6 +64,10 @@ export const App = () => {
         setTasks({...tasks, [newTodolistID]: []});
     }
 
+    const editTodolistTitle = (todolistID: string, title: string) => {
+        setLists(lists.map((todolist: TodolistType) => todolist.id === todolistID ? {...todolist, title,} : todolist));
+    }
+
     return (
         <div className="App">
             <InputForm callback={addTodolist}/>
@@ -88,6 +92,7 @@ export const App = () => {
                                      filter={todolist.taskStatus}
                                      taskIsChecked={taskIsChecked}
                                      removeTodolist={removeTodolist}
+                                     editTodolistTitle={editTodolistTitle}
                     />
                 }
             )}

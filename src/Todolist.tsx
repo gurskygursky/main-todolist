@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {EditableSpan} from './EditableSpan';
 
 export type TaskType = {
     id: string;
@@ -26,6 +27,7 @@ type TodolistPropsType = {
     filter: TaskStatusesType;
     taskIsChecked: (todolistID: string, taskID: string, isDone: boolean) => void;
     removeTodolist: (todolistID: string) => void;
+    editTodolistTitle: (todolistID: string, title: string) => void;
 }
 
 export const Todolist = (props: TodolistPropsType) => {
@@ -67,9 +69,13 @@ export const Todolist = (props: TodolistPropsType) => {
         props.removeTodolist(props.todolistID);
     }
 
+    const editTodolistTitle = (title: string) => {
+        props.editTodolistTitle(props.todolistID, title);
+    }
+
     return (
         <div>
-            <h3>{props.title}
+            <h3><EditableSpan value={props.title} callback={(value) => editTodolistTitle(value)}/>
                 <button onClick={removeTodolist}>x</button>
             </h3>
             <div>
